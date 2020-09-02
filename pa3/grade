@@ -1,0 +1,48 @@
+
+Programming Assignment 6
+**********************************
+Specification :
+cipher.py is present
+   -> all files present +5 points
+cipher.py has a comment author +1 points
+cipher.py has a comment date +1 points
+cipher.py has a comment file +1 points
+cipher.py has a comment input +1 points
+cipher.py has a comment output +1 points
+
+**********************************
+Loops and Conditionals :
+cipher.py has a check while +5 points
+cipher.py has a check if +5 points
+cipher.py has a check except +5 points
+cipher.py has a check file +5 points
+
+**********************************
+Functions:
+cipher.py has the method readfile +2 point
+cipher.py has the method writefile +2 point
+cipher.py has the method encode +2 point
+cipher.py has the method decode +2 point
+cipher.py has the method to_string +2 point
+
+**********************************
+List and String Methods :
+cipher.py has list methods +5 points
+cipher.py has string methods +5 points
+
+**********************************
+Performance :
+
+for input file ex1:
+cipher.py runs without errors for encoding +25 points
+output is correct +25 points
+
+for input file ex2:
+cipher.py runs without errors for decoding +25 points
+output is correct +25 points
+
+**********************************
+Your grade is 150 out of 150 
+
+        
+

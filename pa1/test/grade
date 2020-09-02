@@ -1,0 +1,27 @@
+
+Programming Assignment 1
+**********************************
+Specification :
+hello.py is present +5 points
+hello.py has a comment author +1 points
+hello.py has a comment date +1 points
+hello.py has a comment file +1 points
+hello.py has a comment input +1 points
+hello.py has a comment output +1 points
+
+**********************************
+Performance :
+
+for input file ex1:
+hello.py runs without errors +10 points
+output is correct +10 points
+
+for input file ex2:
+hello.py runs without errors +10 points
+output is correct +10 points
+
+**********************************
+Your grade is 50 out of 50 
+
+        
+

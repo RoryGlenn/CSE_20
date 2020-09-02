@@ -1,0 +1,231 @@
+#! /bin/bash
+# eval_pa6 - grades pa6 performance and specification
+#
+
+EXITCODE=0
+REQ_FILES="cipher.py"
+SOURCES="cipher.py"
+SOURCEMSG="message.txt"
+SOURCESECRET="secret.txt"
+COMMENTS="author date file input output"
+CHECKS="while if except"
+METHODS="list string"
+FILE="file"
+FUNCTIONS="readfile writefile encode decode to_string"
+DATA="ex1 ex2"
+MAIN=python3
+REPORT=grade
+GRADE=0
+
+echo "
+Programming Assignment 6
+**********************************
+Specification :" >> $REPORT
+
+#
+# checks files by filenames
+#
+for f in $REQ_FILES
+do 
+    if [ -e $f -a -s $f ]
+    then
+        echo "$f is present" >> $REPORT
+        ((counter = counter + 1))
+    else
+        echo "$f is named incorrectly or absent" >> $REPORT 
+    fi
+done
+
+if [[ "$counter" == 1  ]]
+then
+    echo "   -> all files present +5 points" >> $REPORT
+    ((GRADE = GRADE + 5))
+else
+    echo "missing or incorrectly named file(s) +0 points" >> $REPORT
+fi
+
+
+
+#
+# checks comment block in cipher.py
+#
+for f in $SOURCES
+do 
+    for c in $COMMENTS
+    do
+        grep -i "#*$c" $f > comments
+        if [ -e comments -a $(wc -l < comments) -eq 0 ]
+        then
+            echo "$f does not have a comment $c +0 points" >> $REPORT
+        else
+            echo "$f has a comment $c +1 points" >> $REPORT
+            ((GRADE = GRADE + 1))
+        fi
+    done
+
+#
+# checks each loop and coditional is present and followed by a :  
+#
+
+echo "
+**********************************
+Loops and Conditionals :" >> $REPORT
+
+    for k in $CHECKS
+    do
+        grep -i "\b$k .*:" $f > checks
+        if [ -e checks -a $(wc -l < checks) -eq 0 ]
+        then
+            echo "$f does not have a check $k +0 points" >> $REPORT
+        else          
+            echo "$f has a check $k +5 points" >> $REPORT
+            ((GRADE = GRADE + 5))
+        fi
+    done
+
+    for k in $FILE
+    do
+        grep -i " $k .*:" $f > checks
+        if [ -e checks -a $(wc -l < checks) -eq 0 ]
+        then
+            echo "$f does not have a check $k +0 points" >> $REPORT
+        else          
+            echo "$f has a check $k +5 points" >> $REPORT
+            ((GRADE = GRADE + 5))
+        fi
+    done
+
+#
+# checks function names in cipher.py
+#
+
+echo "
+**********************************
+Functions:" >> $REPORT
+
+    for k in $FUNCTIONS
+    do
+        grep -i "def *$k" $f > methods
+        if [ -e methods -a $(wc -l < methods) -eq 0 ]
+        then
+            echo "$f does not have the method $k" >> $REPORT
+        else
+            echo "$f has the method $k +2 point" >> $REPORT
+            ((GRADE = GRADE + 2))
+        fi
+    done
+
+#
+# checks list, dictionary, string, and file methods 
+#
+
+echo "
+**********************************
+List and String Methods :" >> $REPORT
+
+    for k in $METHODS
+    do
+        if [ $k == "list" ]
+        then
+            grep -i "= *\[\]" $f > methods
+            grep -i ".append[ \(]" $f >> methods
+        elif [ $k == "string" ]
+        then
+            grep -i ".upper[ \(]" $f > methods
+            grep -i ".join[ \(]" $f >> methods
+            grep -i ".isalpha[ \(]" $f >> methods
+        else
+            grep -i "\bopen[ \(]" $f > methods
+        fi
+        
+        if [ -e methods -a $(wc -l < methods) -eq 0 ]
+        then
+            echo "$f does not have $k methods +0 points" >> $REPORT
+        else
+            echo "$f has $k methods +5 points" >> $REPORT
+            ((GRADE = GRADE + 5))
+        fi
+    done
+
+
+done
+
+
+echo "
+**********************************
+Performance :" >> $REPORT
+
+#
+# checks main application
+#
+if [ -e $SOURCES ]
+then
+
+
+#
+# checks output
+#   
+    for e in $DATA
+    do
+        $MAIN $SOURCES < $e > output 2> errors_$e &
+    PID=$!
+    sleep 2
+    kill -KILL $PID 2> /dev/null
+    echo >> $REPORT
+    echo "for input file $e:" >> $REPORT
+        if [ -e output -a $(wc -l < errors_$e) -eq 0 ]
+        then
+            if [ "$e" == "ex1" ]
+            then
+                echo "$SOURCES runs without errors for encoding +25 points" >> $REPORT
+                ((GRADE = GRADE + 25))
+            else
+                echo "$SOURCES runs without errors for decoding +25 points" >> $REPORT
+                ((GRADE = GRADE + 25))
+            fi
+        else
+            if [ "$e" == "ex1" ]
+            then
+                echo "$SOURCES does not run correctly for encoding +0 points" >> $REPORT
+                echo "      - errors can be seen in file errors_ex1" >> $REPORT
+            else
+                echo "$SOURCES does not run correctly for decoding +0 points" >> $REPORT
+                echo "      - errors can be seen in file errors_ex2" >> $REPORT
+            fi
+        fi
+
+        diff -wB $e.out output >& dif_$e
+        if [ -e output -a $(wc -l < dif_$e) -eq 0 ]
+        then
+            echo "output is correct +25 points" >> $REPORT
+            ((GRADE = GRADE + 25))
+        else
+            echo "output is incorrect +0 points" >> $REPORT
+            if [ "$e" == "ex1" ]
+            then
+                echo "      - differences can be seen in file dif_ex1" >> $REPORT
+            else
+                echo "      - differences can be seen in file dif_ex2" >> $REPORT
+            fi
+        fi
+ 
+    done
+else
+    echo "$SOURCES not implemented +0 points" >> $REPORT
+fi
+
+#
+# prints grade
+# 
+                echo "
+**********************************
+Your grade is $GRADE out of 150 
+
+        
+" >> $REPORT
+
+cat $REPORT
+echo $GRADE > tmp
+rm output comments checks methods tmp
+    
+exit $EXITCODE

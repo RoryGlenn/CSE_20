@@ -1,0 +1,114 @@
+#! /bin/bash
+# eval - grades PA1 performance and specification for one student
+#
+
+EXITCODE=0
+SOURCES="hello.py"
+COMMENTS="author date file input output"
+MAINSOURCE="hello.py"
+DATA="ex1 ex2"
+MAIN=python3
+REPORT=grade
+GRADE=0
+
+echo "
+Programming Assignment 1
+**********************************
+Specification :" >> $REPORT
+
+#
+# checks files by filenames
+#
+for f in $SOURCES
+do 
+    if [ -e $f -a -s $f ]
+    then
+        echo "$f is present +5 points" >> $REPORT
+        ((GRADE = GRADE + 5))
+    else
+    echo "$f is named incorrectly or absent +0 points" >> $REPORT
+        
+    fi
+    for c in $COMMENTS
+    do
+        grep "#*$c" $f > comments
+        if [ -e comments -a $(wc -l < comments) -eq 0 ]
+        then
+            echo "$f does not have a comment $c +0 points" >> $REPORT
+        else
+            echo "$f has a comment $c +1 points" >> $REPORT
+            ((GRADE = GRADE + 1))
+        fi
+    done
+done
+
+echo "
+**********************************
+Performance :" >> $REPORT
+
+#
+# checks main application
+#
+if [ -e $MAINSOURCE ]
+then
+
+#
+# checks output
+#   
+    for e in $DATA
+    do
+        $MAIN $MAINSOURCE < $e > output 2> errors &
+    PID=$!
+    sleep 2
+    kill -KILL $PID 2> /dev/null
+    echo >> $REPORT
+    echo "for input file $e:" >> $REPORT
+        if [ -e output -a $(wc -l < errors) -eq 0 ]
+        then
+            echo "$MAINSOURCE runs without errors +10 points" >> $REPORT
+            ((GRADE = GRADE + 10))
+        else
+            echo "$MAINSOURCE does not run correctly +0 points" >> $REPORT
+            if [ "$e" == "ex1" ]
+            then
+                cp errors errors_ex1
+            else
+                cp errors errors_ex2
+            fi
+        fi
+
+        diff -wB $e.out output >& dif
+        if [ -e output -a $(wc -l < dif) -eq 0 ]
+        then
+            echo "output is correct +10 points" >> $REPORT
+            ((GRADE = GRADE + 10))
+        else
+            echo "output is incorrect +0 points" >> $REPORT
+
+            if [ "$e" == "ex1" ]
+            then
+                cp dif dif_ex1
+            else
+                cp dif dif_ex2
+            fi
+        fi
+ 
+    done
+else
+    echo "$MAINSOURCE not implemented +0 points" >> $REPORT
+fi
+#
+# prints grade
+# 
+                echo "
+**********************************
+Your grade is $GRADE out of 50 
+
+        
+" >> $REPORT
+
+cat $REPORT
+#echo $GRADE > tmp
+rm dif output errors comments
+    
+exit $EXITCODE

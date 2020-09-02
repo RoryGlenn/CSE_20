@@ -1,0 +1,189 @@
+
+Programming Assignment 5
+**********************************
+Specification :
+tictac.py is present
+board.py is present
+player.py is present
+   -> all files present +4 points
+tictac.py has a comment author +1 points
+tictac.py has a comment date +1 points
+tictac.py has a comment file +1 points
+tictac.py has a comment input +1 points
+tictac.py has a comment output +1 points
+
+**********************************
+Loops and Conditionals :
+tictac.py has a check if +5 points
+Loop method(s) present +5 points
+
+**********************************
+List and String Methods :
+List method(s) present +5 points
+String method(s) present +5 points
+
+**********************************
+Board class and methods :
+class Board present +5 points
+board.py has the method __init__
+board.py has the method get_size
+board.py has the method get_winner
+board.py has the method set
+board.py has the method isempty
+board.py has the method isdone
+board.py has the method show
+   -> all methods present +7 points
+
+**********************************
+Player class and methods :
+class Player present +5 points
+player.py has the method __init__
+player.py has the method get_sign
+player.py has the method get_name
+player.py has the method choose
+   -> all methods present +4 points
+
+**********************************
+Performance :
+
+for input file ex1:
+tictac.py runs without errors for simple input +25 points
+output is incorrect +0 points
+      - differences can be seen in file dif_ex1
+
+for input file ex2:
+tictac.py runs without errors for repeated inputs and loops to play again +25 points
+output is incorrect +0 points
+      - differences can be seen in file dif_ex2
+
+**********************************
+Your grade is 100 out of 150 
+
+        
+
+
+Programming Assignment 5
+**********************************
+Specification :
+tictac.py is present
+board.py is present
+player.py is present
+   -> all files present +4 points
+tictac.py has a comment author +1 points
+tictac.py has a comment date +1 points
+tictac.py has a comment file +1 points
+tictac.py has a comment input +1 points
+tictac.py has a comment output +1 points
+
+**********************************
+Loops and Conditionals :
+tictac.py has a check if +5 points
+Loop method(s) present +5 points
+
+**********************************
+List and String Methods :
+List method(s) present +5 points
+String method(s) present +5 points
+
+**********************************
+Board class and methods :
+class Board present +5 points
+board.py has the method __init__
+board.py has the method get_size
+board.py has the method get_winner
+board.py has the method set
+board.py has the method isempty
+board.py has the method isdone
+board.py has the method show
+   -> all methods present +7 points
+
+**********************************
+Player class and methods :
+class Player present +5 points
+player.py has the method __init__
+player.py has the method get_sign
+player.py has the method get_name
+player.py has the method choose
+   -> all methods present +4 points
+
+**********************************
+Performance :
+
+for input file ex1:
+tictac.py runs without errors for simple input +25 points
+output is correct +25 points
+
+for input file ex2:
+tictac.py runs without errors for repeated inputs and loops to play again +25 points
+output is correct +25 points
+
+**********************************
+Your grade is 150 out of 150 
+
+        
+
+
+Programming Assignment 5
+**********************************
+Specification :
+tictac.py is present
+board.py is present
+player.py is present
+   -> all files present +4 points
+tictac.py has a comment author +1 points
+tictac.py has a comment date +1 points
+tictac.py has a comment file +1 points
+tictac.py has a comment input +1 points
+tictac.py has a comment output +1 points
+
+**********************************
+Loops and Conditionals :
+tictac.py has a check if +5 points
+Loop method(s) present +5 points
+
+**********************************
+List and String Methods :
+List method(s) present +5 points
+String method(s) present +5 points
+
+**********************************
+Board class and methods :
+class Board present +5 points
+board.py has the method __init__
+board.py has the method get_size
+board.py has the method get_winner
+board.py has the method set
+board.py has the method isempty
+board.py has the method isdone
+board.py has the method show
+   -> all methods present +7 points
+
+**********************************
+Player class and methods :
+class Player present +5 points
+player.py has the method __init__
+player.py has the method get_sign
+player.py has the method get_name
+player.py has the method choose
+   -> all methods present +4 points
+
+**********************************
+Performance :
+
+for input file ex1:
+tictac.py does not run correctly for simple, properly formated types of input +0 points
+      - errors can be seen in file errors_ex1
+output is incorrect +0 points
+      - differences can be seen in file dif_ex1
+
+for input file ex2:
+tictac.py does not run correctly for repeated input or looping to play again +0 points
+      - errors can be seen in file errors_ex2
+output is incorrect +0 points
+      - differences can be seen in file dif_ex2
+
+**********************************
+Your grade is 50 out of 150 
+
+        
+
